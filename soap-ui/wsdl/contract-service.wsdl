@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<definitions name = "ContractService"
+   targetNamespace = "http://www.javaansehz.org/wsdl/ContractService.wsdl"
+   xmlns = "http://schemas.xmlsoap.org/wsdl/"
+   xmlns:soap = "http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:tns = "http://www.javaansehz.org/wsdl/ContractService.wsdl"
+   xmlns:esxsd="http://www.javaansehz.org/contract.xsd">
+
+   <message name = "CreateContractRequest">
+       <part name="body" element="esxsd:CreateContractRequest"/>
+   </message>
+
+   <message name = "CreateContractResponse">
+       <part name="body" element="esxsd:CreateContractResponse"/>
+   </message>
+
+   <portType name = "Contract_PortType">
+       <operation name = "createContract">
+           <input message = "tns:CreateContractRequest"/>
+           <output message = "tns:CreateContractResponse"/>
+       </operation>
+   </portType>
+
+   <binding name = "Contract_Binding" type = "tns:Contract_PortType">
+       <soap:binding style = "rpc"
+         transport = "http://schemas.xmlsoap.org/soap/http"/>
+       <operation name = "createContract">
+           <soap:operation soapAction = "createContract"/>
+           <input>
+               <soap:body
+                 encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
+                 namespace = "urn:examples:contractservice"
+                 use = "encoded"/>
+           </input>
+
+           <output>
+               <soap:body
+                 encodingStyle = "http://schemas.xmlsoap.org/soap/encoding/"
+                 namespace = "urn:examples:contractservice"
+                 use = "encoded"/>
+           </output>
+       </operation>
+   </binding>
+
+   <service name = "Contract_Service">
+       <documentation>WSDL File for ContractService</documentation>
+       <port binding = "tns:Hello_Binding" name = "Contract_Port">
+           <soap:address
+             location = "http://www.javaansehz.org/CreateContract/" />
+       </port>
+   </service>
+   <types>
+       <xsd:schema targetNamespace = "http://www.javaansehz.org/contract.xsd"
+          xmlns:xsd = "http://www.w3.org/2000/10/XMLSchema">
+           <xsd:element name = "CreateContractRequest">
+               <xsd:complexType>
+                   <xsd:sequence>
+                       <xsd:element ref="contract"/>
+                   </xsd:sequence>
+               </xsd:complexType>
+           </xsd:element>
+           <xsd:element name = "CreateContractResponse">
+               <xsd:complexType>
+                   <xsd:sequence>
+                       <xsd:element ref="contract"/>
+                   </xsd:sequence>
+               </xsd:complexType>
+           </xsd:element>
+           <xsd:element name = "contract">
+               <xsd:complexType>
+                   <xsd:sequence>
+                       <xsd:element name = "type" type = "string"/>
+                       <xsd:element name = "premium" type = "float"/>
+                       <xsd:element ref="client" maxOccurs="unbounded"/>
+                   </xsd:sequence>
+               </xsd:complexType>
+           </xsd:element>
+           <xsd:element name = "client">
+               <xsd:complexType>
+                   <xsd:sequence>
+                       <xsd:element ref="name"/>
+                       <xsd:element name="city" type="xs:string"/>
+                       <xsd:element name="country" type="xs:string"/>
+                   </xsd:sequence>
+               </xsd:complexType>
+           </xsd:element>
+           <xsd:element name = "name">
+               <xsd:complexType>
+                   <xsd:sequence>
+                       <xsd:element name="firstname" type="xs:string"/>
+                       <xsd:element name="lastname" type="xs:string"/>
+                   </xsd:sequence>
+               </xsd:complexType>
+           </xsd:element>
+       </xsd:schema>
+   </types>
+</definitions>

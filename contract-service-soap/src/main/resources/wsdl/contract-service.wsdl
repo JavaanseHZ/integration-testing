@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-  xmlns:sch="http://javaansehz.com/contracts"
   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-  xmlns:tns="http://javaansehz.com/contracts"
-  targetNamespace="http://javaansehz.com/contracts">
+  xmlns:tns="http://contracts.de/contracts"
+  targetNamespace="http://contracts.de/contracts">
 
   <wsdl:types>
-    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://javaansehz.com/contracts">
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://contracts.de/contracts">
 
     <xs:element name="calculateContractRequest">
         <xs:complexType>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project id="09489096-98ae-45f7-926c-a637d79b640b" activeEnvironment="Default" name="contract-services" resourceRoot="" soapui-version="5.4.0" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" id="968f32ba-712a-4195-8e30-891016deafda" wsaVersion="NONE" name="ContractsPortSoap" type="wsdl" bindingName="{http://contracts.de/contracts}ContractsPortSoap" soapVersion="1_1" anonymous="optional" definition="file:/home/ben/dev/integration-testing/contract-service-soap/src/main/resources/wsdl/contract-service-soap.wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="file:/home/ben/dev/integration-testing/contract-service-soap/src/main/resources/wsdl/contract-service-soap.wsdl"><con:part><con:url>file:/home/ben/dev/integration-testing/contract-service-soap/src/main/resources/wsdl/contract-service-soap.wsdl</con:url><con:content><![CDATA[<wsdl:definitions targetNamespace="http://contracts.de/contracts" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://contracts.de/contracts">
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://contracts.de/contracts" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="calculateContractRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="contract" type="tns:contract"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="calculateContractResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="contract" type="tns:contract"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:complexType name="contract">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="client" type="tns:client" maxOccurs="unbounded"/>
+          <xs:element name="premium" type="xs:double"/>
+          <xs:element name="type" type="xs:string"/>
+          <xs:element name="risk" type="tns:risk"/>
+          <xs:element name="signed" type="xs:date"/>
+          <xs:element name="active" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="client">
+        <xs:sequence>
+          <xs:element name="id" type="xs:integer"/>
+          <xs:element name="name" type="tns:name"/>
+          <xs:element name="dateOfBirth" type="xs:date"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="name">
+        <xs:sequence>
+          <xs:element name="firstname" type="xs:string"/>
+          <xs:element name="lastname" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="risk" final="restriction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="low"/>
+          <xs:enumeration value="mdeium"/>
+          <xs:enumeration value="high"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="calculateContractRequest">
+    <wsdl:part element="tns:calculateContractRequest" name="calculateContractRequest"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="calculateContractResponse">
+    <wsdl:part element="tns:calculateContractResponse" name="calculateContractResponse"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ContractsPort">
+    <wsdl:operation name="calculateContract">
+      <wsdl:input message="tns:calculateContractRequest" name="calculateContractRequest"></wsdl:input>
+      <wsdl:output message="tns:calculateContractResponse" name="calculateContractResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ContractsPortSoap" type="tns:ContractsPort">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="calculateContract">
+      <soap:operation soapAction=""/>
+      <wsdl:input name="calculateContractRequest">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="calculateContractResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ContractsPortService">
+    <wsdl:port binding="tns:ContractsPortSoap" name="ContractsPortSoap">
+      <soap:address location="http://localhost:8080/ws"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/ws</con:endpoint></con:endpoints><con:operation id="6ecddf87-7d2f-46f0-8a8f-9186732956ea" isOneWay="false" action="" name="calculateContract" bindingOperationName="calculateContract" type="Request-Response" outputName="calculateContractResponse" inputName="calculateContractRequest" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call id="98f165b5-528f-4c81-add1-5f3ad10670a1" name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/ws</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://contracts.de/contracts">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <con:calculateContractRequest>
+         <con:contract>
+            <con:id>?</con:id>
+            <!--1 or more repetitions:-->
+            <con:client>
+               <con:id>?</con:id>
+               <con:name>
+                  <con:firstname>?</con:firstname>
+                  <con:lastname>?</con:lastname>
+               </con:name>
+               <con:dateOfBirth>?</con:dateOfBirth>
+            </con:client>
+            <con:premium>?</con:premium>
+            <con:type>?</con:type>
+            <con:risk>?</con:risk>
+            <con:signed>?</con:signed>
+            <con:active>?</con:active>
+         </con:contract>
+      </con:calculateContractRequest>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://contracts.de/contracts/ContractsPort/calculateContractRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:RestService" id="0b35a53a-8c01-4d66-a745-4ca99b32af22" wadlVersion="http://wadl.dev.java.net/2009/02" name="Swagger Contract Calculator" type="rest" basePath="/v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>Simple Contract Calculation Application</con:description><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost</con:endpoint><con:endpoint>https://localhost</con:endpoint></con:endpoints><con:resource name="/conctract" path="/conctract" id="7628eb51-8fd7-4637-ba13-a07a8d769d89"><con:settings/><con:parameters/><con:method name="calulateContract" id="fde19e33-b0d6-41e1-8fb7-be2598e9f1ea" method="POST"><con:description>
+calculate contract</con:description><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>405</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="4ae7d116-8b51-4d83-b148-2d3c556a7ee7" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>http://localhost</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

@@ -74,6 +74,6 @@ wsdl2java {
     generatedWsdlDir = file("gen-src/src/main/java")
     wsdlDir = file("src/main/resources/wsdl")
     wsdlsToGenerate = [
-        ['src/main/resources/wsdl/contract-service.wsdl']
+        ['src/main/resources/wsdl/contract-service-soap.wsdl']
     ]
 }

@@ -39,7 +39,10 @@
         ],
         "responses": {
           "200": {
-            "description": "contract sucessfully calculated"
+            "description": "contract sucessfully calculated",
+            "schema": {
+              "$ref": "#/definitions/Contract"
+            }
           },
           "405": {
             "description": "invalid contract input"

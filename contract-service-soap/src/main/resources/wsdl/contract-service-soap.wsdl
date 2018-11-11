@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-  xmlns:sch="http://javaansehz.com/contracts"
   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
-  xmlns:tns="http://javaansehz.com/contracts"
-  targetNamespace="http://javaansehz.com/contracts">
+  xmlns:tns="http://contracts.de/contracts"
+  targetNamespace="http://contracts.de/contracts">
 
   <wsdl:types>
-    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://javaansehz.com/contracts">
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://contracts.de/contracts">
 
     <xs:element name="calculateContractRequest">
         <xs:complexType>
@@ -24,41 +23,41 @@
         </xs:complexType>
     </xs:element>
 
-    <xs:complexType name="contract">
-        <xs:sequence>
-            <xs:element name="id" type="xs:integer"/>
-            <xs:element name="client" type="tns:client" maxOccurs="unbounded"/>
-            <xs:element name="premium" type="xs:double"/>
-            <xs:element name="type" type="xs:string"/>
-            <xs:element name="risk" type="tns:risk"/>
-            <xs:element name="signed" type="xs:date"/>
-            <xs:element name="active" type="xs:boolean"/>
+        <xs:complexType name="contract">
+            <xs:sequence>
+                <xs:element name="id" type="xs:integer"/>
+                <xs:element name="client" type="tns:client" maxOccurs="unbounded"/>
+                <xs:element name="premium" type="xs:double"/>
+                <xs:element name="type" type="xs:string"/>
+                <xs:element name="risk" type="tns:risk"/>
+                <xs:element name="signed" type="xs:date"/>
+                <xs:element name="active" type="xs:boolean"/>
 
-        </xs:sequence>
-    </xs:complexType>
+            </xs:sequence>
+        </xs:complexType>
 
-    <xs:complexType name = "client">
-        <xs:sequence>
-            <xs:element name="id" type="xs:integer"/>
-            <xs:element name="name" type="tns:name"/>
-            <xs:element name="dateOfBirth" type="xs:date"/>
-        </xs:sequence>
-    </xs:complexType>
+        <xs:complexType name = "client">
+            <xs:sequence>
+                <xs:element name="id" type="xs:integer"/>
+                <xs:element name="name" type="tns:name"/>
+                <xs:element name="dateOfBirth" type="xs:date"/>
+            </xs:sequence>
+        </xs:complexType>
 
-    <xs:complexType name = "name">
-        <xs:sequence>
-            <xs:element name="firstname" type="xs:string"/>
-            <xs:element name="lastname" type="xs:string"/>
-        </xs:sequence>
-    </xs:complexType>
+        <xs:complexType name = "name">
+            <xs:sequence>
+                <xs:element name="firstname" type="xs:string"/>
+                <xs:element name="lastname" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
 
-    <xs:simpleType name="risk" final="restriction" >
-       <xs:restriction base="xs:string">
-           <xs:enumeration value="low" />
-           <xs:enumeration value="mdeium" />
-           <xs:enumeration value="high" />
-       </xs:restriction>
-    </xs:simpleType>
+        <xs:simpleType name="risk" final="restriction" >
+            <xs:restriction base="xs:string">
+                <xs:enumeration value="low" />
+                <xs:enumeration value="mdeium" />
+                <xs:enumeration value="high" />
+            </xs:restriction>
+        </xs:simpleType>
 
     </xs:schema>
   </wsdl:types>

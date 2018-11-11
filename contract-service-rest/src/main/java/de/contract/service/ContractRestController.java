@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.time.OffsetDateTime;
 
 @RestController
 public class ContractRestController implements ContractApi {
@@ -22,6 +23,7 @@ public class ContractRestController implements ContractApi {
             method = {RequestMethod.POST}
     )
     public ResponseEntity<Contract> calulateContract(@Valid @RequestBody Contract body) {
+        body.active(true).signed(OffsetDateTime.now());
         return new ResponseEntity(body, HttpStatus.OK);
     }
 }

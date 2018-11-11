@@ -7,7 +7,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.0.6.RELEASE')
+        classpath('org.springframework.boot:spring-boot-gradle-plugin:2.1.0.RELEASE')
         classpath('com.bmuschko:gradle-docker-plugin:3.6.2')
         classpath 'no.nils:wsdl2java:0.10'
     }
@@ -61,7 +61,7 @@ docker {
     springBootApplication {
         baseImage = 'openjdk:11-slim'
         tag = 'contract-service-soap:latest'
-        ports = [9000, 6000]
+        ports = [9000, 8080]
     }
 }
 

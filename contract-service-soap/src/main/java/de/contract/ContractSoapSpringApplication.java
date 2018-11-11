@@ -10,5 +10,4 @@ public class ContractSoapSpringApplication {
         SpringApplication.run(ContractSoapSpringApplication.class, args);
     }
 
-
 }

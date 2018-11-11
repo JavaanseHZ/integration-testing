@@ -29,8 +29,9 @@ sourceCompatibility = 10
 targetCompatibility = 10
 
 dependencies {
-    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator')
     compile ('org.apache.cxf:cxf-spring-boot-starter-jaxws:3.2.7')
+    compile('ma.glasnost.orika:orika-core:1.5.2')
 
 
     compile('com.sun.xml.bind:jaxb-core:2.3.0')

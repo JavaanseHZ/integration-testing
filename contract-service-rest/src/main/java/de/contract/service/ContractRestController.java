@@ -13,6 +13,7 @@ import javax.validation.Valid;
 import java.time.OffsetDateTime;
 
 @RestController
+@RequestMapping(value = "/contract")
 public class ContractRestController implements ContractApi {
 
     @RequestMapping(

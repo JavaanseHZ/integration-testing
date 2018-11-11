@@ -31,6 +31,9 @@ targetCompatibility = 10
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-actuator')
     compile('org.springframework.boot:spring-boot-starter-web')
+    compile('io.springfox:springfox-swagger-ui:2.9.2')
+    compile('io.springfox:springfox-swagger2:2.9.2')
+
     compile('io.swagger:swagger-annotations:1.5.21')
     swaggerCodegen('io.swagger:swagger-codegen-cli:2.3.1')
 }

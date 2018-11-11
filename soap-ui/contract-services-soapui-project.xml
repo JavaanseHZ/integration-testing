@@ -102,27 +102,78 @@
       </con:calculateContractRequest>
    </soapenv:Body>
 </soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://contracts.de/contracts/ContractsPort/calculateContractRequest"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:RestService" id="99b01dd6-7551-44cd-a5c5-fe1de31e0c52" wadlVersion="http://wadl.dev.java.net/2009/02" name="contract-rest-service" type="rest" basePath="/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:description>Contract Calulation Rest Service</con:description><con:settings/><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>http://localhost:8081</con:endpoint></con:endpoints><con:resource name="/contract/contract" path="/contract/contract" id="f9c0cdbf-c812-4cd8-8515-55f5916e12fe"><con:settings/><con:parameters/><con:method name="calulateContract" id="c466c253-c4ea-4706-82dc-f3453b0ebcdd" method="POST"><con:description>
-calculate contract</con:description><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>201</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>401</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>403</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>405</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="c4b05b64-15c9-4656-a038-a1353642d15b" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>http://localhost:8081</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="a15e5a44-408f-4a91-b6a3-232e5b9abdcf" name="SimpleSoapTest"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="625a56b7-e05d-4669-aacf-3ff8751a3efc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="calculateContract" searchProperties="true"><con:settings/><con:testStep type="request" id="fbb0d136-b973-4c6f-952b-36f0a07f73e6" name="calculateContract"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ContractsPortSoap</con:interface><con:operation>calculateContract</con:operation><con:request name="calculateContract" id="d188003a-cb7e-4ea5-83be-5ac646173920"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/contracts</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://contracts.de/contracts">
+calculate contract</con:description><con:settings/><con:parameters/><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>200</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>201</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>401</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>403</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>404</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>405</con:status><con:params/></con:representation><con:representation type="RESPONSE"><con:mediaType>application/json</con:mediaType><con:status>500</con:status><con:params/></con:representation><con:representation type="REQUEST"><con:mediaType>application/json</con:mediaType><con:params/></con:representation><con:request name="Request 1" id="c4b05b64-15c9-4656-a038-a1353642d15b" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>http://localhost:8081</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:request></con:method></con:resource></con:interface><con:testSuite id="a15e5a44-408f-4a91-b6a3-232e5b9abdcf" name="SimpleSoapTest"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="625a56b7-e05d-4669-aacf-3ff8751a3efc" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="calculateContract" searchProperties="true"><con:settings/><con:testStep type="groovy" name="GS - Data Source" id="486e7e50-bff5-495d-b1b0-c30399187850"><con:settings/><con:config><script>import com.eviware.soapui.support.XmlHolder
+def myTestCase = context.testCase
+def counter,next,previous,size
+def projectPath = new com.eviware.soapui.support.GroovyUtils(context).projectPath //gets the path of the project root
+File tickerEnumFile = new File(projectPath + "/input.txt") //make sure input.txt file already exists and contains different set of values sepearted by new line (CR).
+List lines = tickerEnumFile.readLines()
+size = lines.size.toInteger()
+propTestStep = myTestCase.getTestStepByName("Property - Looper") // get the Property TestStep
+propTestStep.setPropertyValue("Total", size.toString())
+counter = propTestStep.getPropertyValue("Count").toString()
+counter= counter.toInteger()
+next = (counter > size-2? 0: counter+1)
+tempValue = lines[counter]
+propTestStep.setPropertyValue("Value", tempValue)
+propTestStep.setPropertyValue("Count", next.toString())
+next++
+log.info "Reading line : ${(counter+1)} / $lines.size"
+propTestStep.setPropertyValue("Next", next.toString())
+log.info "Value '$tempValue' -- updated in $propTestStep.name"
+if (counter == size-1)
+{
+propTestStep.setPropertyValue("StopLoop", "T")
+log.info "Setting the stoploop property now..."
+}
+else if (counter==0)
+{
+def runner = new com.eviware.soapui.impl.wsdl.testcase.WsdlTestCaseRunner(testRunner.testCase, null)
+propTestStep.setPropertyValue("StopLoop", "F")
+}
+else
+{
+propTestStep.setPropertyValue("StopLoop", "F")
+}</script></con:config></con:testStep><con:testStep type="properties" name="Property - Looper" id="8bf99b87-efea-4e0b-90a1-70e8c87c3f4e"><con:settings/><con:config xsi:type="con:PropertiesStep" saveFirst="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:properties><con:property><con:name>Total</con:name><con:value>2</con:value></con:property><con:property><con:name>Value</con:name><con:value>Hanno, Friedrich</con:value></con:property><con:property><con:name>Count</con:name><con:value>0</con:value></con:property><con:property><con:name>Next</con:name><con:value>1</con:value></con:property><con:property><con:name>StopLoop</con:name><con:value>T</con:value></con:property></con:properties></con:config></con:testStep><con:testStep type="request" id="fbb0d136-b973-4c6f-952b-36f0a07f73e6" name="calculateContract"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ContractsPortSoap</con:interface><con:operation>calculateContract</con:operation><con:request name="calculateContract" id="d188003a-cb7e-4ea5-83be-5ac646173920"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/services/contracts</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://contracts.de/contracts">
    <soapenv:Header/>
    <soapenv:Body>
       <con:calculateContractRequest>
          <con:contract>
-            <con:id>?</con:id>
+            <con:id>12341</con:id>
             <!--1 or more repetitions:-->
             <con:client>
-               <con:id>?</con:id>
+               <con:id>123123</con:id>
                <con:name>
-                  <con:firstname>?</con:firstname>
-                  <con:lastname>?</con:lastname>
+                  <con:firstname>${Property- Looper#Value}</con:firstname>
+                  <con:lastname>sddsff</con:lastname>
                </con:name>
-               <con:dateOfBirth>?</con:dateOfBirth>
+               <con:dateOfBirth>2012-11-11</con:dateOfBirth>
             </con:client>
-            <con:premium>?</con:premium>
-            <con:type>?</con:type>
-            <con:risk>?</con:risk>
-            <con:signed>?</con:signed>
-            <con:active>?</con:active>
+            <con:premium>12343</con:premium>
+            <con:type>insurance</con:type>
+            <con:risk>low</con:risk>
+            <con:signed>2018-11-11</con:signed>
+            <con:active>false</con:active>
          </con:contract>
       </con:calculateContractRequest>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:wsaConfig action="http://contracts.de/contracts/ContractsPort/calculateContractRequest"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="64d7f788-97a7-49ea-a1e7-1d20b30d1cff" name="SimpleRestTest"><con:description>TestSuite generated for REST Service [contract-rest-service]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="d0a315f1-3098-4e4c-8e04-95caa8ab7802" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="calculateContract" searchProperties="true"><con:description>TestCase generated for REST Resource [/contract/contract] located at [/contract/contract]</con:description><con:settings/><con:testStep type="restrequest" name="Request 1" id="4b5a7d69-b4e2-4b9f-aaa2-74e21069c20c"><con:settings/><con:config service="contract-rest-service" resourcePath="//contract/contract" methodName="calulateContract" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Request 1" id="c4b05b64-15c9-4656-a038-a1353642d15b" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>http://localhost:8081</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig action="http://contracts.de/contracts/ContractsPort/calculateContractRequest" mustUnderstand="NONE" version="200508"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="groovy" name="GS - Data Loop" id="888c5ff8-9589-4205-b2eb-b11c6abb6cac"><con:settings/><con:config><script>/*&lt;/pre>
+@Author : Pradeep Bishnoi
+@Description : Data Source Looper responsible for looping a specific teststep.
+@GroovyTestStepName : "Groovy Script - Data Loop"
+*/
+def myTestCase = context.testCase
+ 
+def runner
+propTestStep = myTestCase.getTestStepByName("Property - Looper") // get the Property TestStep
+endLoop = propTestStep.getPropertyValue("StopLoop").toString()
+ 
+if (endLoop.toString() == "T" || endLoop.toString()=="True" || endLoop.toString()=="true")
+{
+ log.info ("Exit Groovy Data Source Looper")
+ assert true
+}
+else
+{
+ testRunner.gotoStepByName("GS - DataSource") //setStartStep
+}</script></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:testSuite id="64d7f788-97a7-49ea-a1e7-1d20b30d1cff" name="SimpleRestTest"><con:description>TestSuite generated for REST Service [contract-rest-service]</con:description><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase id="d0a315f1-3098-4e4c-8e04-95caa8ab7802" failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="calculateContract" searchProperties="true"><con:description>TestCase generated for REST Resource [/contract/contract] located at [/contract/contract]</con:description><con:settings/><con:testStep type="restrequest" name="Request 1" id="4b5a7d69-b4e2-4b9f-aaa2-74e21069c20c"><con:settings/><con:config service="contract-rest-service" resourcePath="//contract/contract" methodName="calulateContract" xsi:type="con:RestRequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:restRequest name="Request 1" id="c4b05b64-15c9-4656-a038-a1353642d15b" mediaType="application/json" postQueryString="false"><con:settings/><con:endpoint>http://localhost:8081</con:endpoint><con:request/><con:credentials><con:authType>No Authorization</con:authType></con:credentials><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:parameters/></con:restRequest></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:oAuth2ProfileContainer/><con:oAuth1ProfileContainer/></con:soapui-project>

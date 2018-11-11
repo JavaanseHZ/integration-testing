@@ -26,18 +26,22 @@
 
     <xs:complexType name="contract">
         <xs:sequence>
-            <xs:element name="id" type="xs:string"/>
+            <xs:element name="id" type="xs:integer"/>
             <xs:element name="client" type="tns:client" maxOccurs="unbounded"/>
             <xs:element name="premium" type="xs:double"/>
             <xs:element name="type" type="xs:string"/>
+            <xs:element name="risk" type="tns:risk"/>
+            <xs:element name="signed" type="xs:date"/>
+            <xs:element name="active" type="xs:boolean"/>
+
         </xs:sequence>
     </xs:complexType>
 
     <xs:complexType name = "client">
         <xs:sequence>
+            <xs:element name="id" type="xs:integer"/>
             <xs:element name="name" type="tns:name"/>
-            <xs:element name="city" type="xs:string"/>
-            <xs:element name="country" type="xs:string"/>
+            <xs:element name="dateOfBirth" type="xs:date"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -47,6 +51,14 @@
             <xs:element name="lastname" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>
+
+    <xs:simpleType name="risk" final="restriction" >
+       <xs:restriction base="xs:string">
+           <xs:enumeration value="low" />
+           <xs:enumeration value="mdeium" />
+           <xs:enumeration value="high" />
+       </xs:restriction>
+    </xs:simpleType>
 
     </xs:schema>
   </wsdl:types>

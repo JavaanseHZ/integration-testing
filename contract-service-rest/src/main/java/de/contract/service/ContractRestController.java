@@ -1,6 +1,5 @@
 package de.contract.service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.contract.service.api.ContractApi;
 import de.contract.service.model.Contract;
 import org.springframework.http.HttpStatus;

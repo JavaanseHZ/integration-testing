@@ -5,7 +5,6 @@ import de.contracts.contracts.CalculateContractResponse;
 import de.contracts.contracts.Contract;
 import de.contracts.contracts.ContractsPort;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -22,7 +21,6 @@ public class ContractsService implements ContractsPort {
             throw new RuntimeException("Init Error!", e);
         }
     }
-
 
     @Override
     public CalculateContractResponse calculateContract(CalculateContractRequest calculateContractRequest) {

@@ -1,10 +1,11 @@
-package rest;
+package contract;
+
 import com.intuit.karate.junit4.Karate;
 import cucumber.api.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Karate.class)
-@CucumberOptions(features = "classpath:rest")
-public class RestStandaloneRunner {
-    
+@CucumberOptions(features = "classpath:contract")
+public class ContractKarateTestRunner {
+
 }

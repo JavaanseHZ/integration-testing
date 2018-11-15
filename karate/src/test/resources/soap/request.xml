@@ -1,0 +1,28 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://contracts.de/contracts">
+    <soapenv:Header/>
+    <soapenv:Body>
+        <con:calculateContractRequest>
+            <con:contract>
+                <con:clients>
+                    <con:id>1</con:id>
+                    <con:name>
+                        <con:firstname>Ben</con:firstname>
+                        <con:lastname>Sample</con:lastname>
+                    </con:name>
+                    <con:dateOfBirth>1988-05-15</con:dateOfBirth>
+                </con:clients>
+                <con:clients>
+                    <con:id>2</con:id>
+                    <con:name>
+                        <con:firstname>Frank</con:firstname>
+                        <con:lastname>McDonald</con:lastname>
+                    </con:name>
+                    <con:dateOfBirth>1982-01-11</con:dateOfBirth>
+                </con:clients>
+                <con:type>insurance</con:type>
+                <con:signed>2018-11-11</con:signed>
+                <con:active>true</con:active>
+            </con:contract>
+        </con:calculateContractRequest>
+    </soapenv:Body>
+</soapenv:Envelope>

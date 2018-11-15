@@ -60,21 +60,27 @@
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "readOnly":true
+        },
+        "type": {
+          "type": "string"
         },
         "premium": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "readOnly":true
         },
         "signed": {
           "type": "string",
-          "format": "date-time"
+          "format": "date"
         },
         "clients": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Client"
-          }
+          },
+          "minItems": 1
         },
         "risk": {
           "type": "string",
@@ -83,13 +89,18 @@
             "low",
             "medium",
             "high"
-          ]
+          ],
+          "readOnly":true
         },
         "active": {
           "type": "boolean",
-          "default": false
+          "default": false,
+          "readOnly":true
         }
-      }
+      },
+      "required": [
+        "signed"
+      ]
     },
     "Client": {
       "type": "object",
@@ -103,9 +114,13 @@
         },
         "dateOfBirth": {
           "type": "string",
-          "format": "date-time"
+          "format": "date"
         }
-      }
+      },
+      "required": [
+        "id",
+        "dateOfBirth"
+      ]
     },
     "Name": {
       "type": "object",

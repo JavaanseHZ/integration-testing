@@ -10,10 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import java.time.OffsetDateTime;
+import java.time.LocalDate;
+import java.util.Random;
 
 @RestController
-@RequestMapping(value = "/contract")
+@RequestMapping(value = "contract")
 public class ContractRestController implements ContractApi {
 
     @RequestMapping(
@@ -23,7 +24,31 @@ public class ContractRestController implements ContractApi {
             method = {RequestMethod.POST}
     )
     public ResponseEntity<Contract> calulateContract(@Valid @RequestBody Contract body) {
-        body.active(true).signed(OffsetDateTime.now());
+        calculatePremium(body);
+        setConditions(body);
         return new ResponseEntity(body, HttpStatus.OK);
+    }
+
+    private void setConditions(Contract contract) {
+        contract.setId(new Random().nextLong());
+        switch(contract.getClients().size()) {
+            case 1:
+                contract.setRisk(Contract.RiskEnum.LOW);
+                break;
+            case 2:
+                contract.setRisk(Contract.RiskEnum.MEDIUM);
+                break;
+            default:
+                contract.setRisk(Contract.RiskEnum.HIGH);
+        }
+    }
+
+    private void calculatePremium(Contract contract) {
+        contract.setPremium(contract.getClients().size() * 200.0);
+        if(contract.getClients().stream()
+                .map(c -> c.getDateOfBirth())
+                .anyMatch(date -> date.isAfter(LocalDate.of(2000, 1, 1)))) {
+            contract.setPremium(contract.getPremium() * 1.5);
+        }
     }
 }

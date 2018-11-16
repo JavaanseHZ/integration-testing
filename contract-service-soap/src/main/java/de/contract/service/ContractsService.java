@@ -3,11 +3,7 @@ package de.contract.service;
 import de.contracts.contracts.*;
 import org.springframework.stereotype.Controller;
 
-import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.GregorianCalendar;
 import java.util.Random;
 
 @Controller

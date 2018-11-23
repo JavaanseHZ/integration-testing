@@ -1,4 +1,8 @@
-apply plugin: 'java'
+plugins {
+    id "com.github.lkishalmi.gatling" version "3.0.1"
+    id 'java'
+    id 'scala'
+}
 
 sourceCompatibility = 10
 targetCompatibility = 10
@@ -9,12 +13,18 @@ repositories {
 }
 
 dependencies {
-    testCompile('com.intuit.karate:karate-apache:0.7.0.2')
-    testCompile('com.intuit.karate:karate-junit4:0.7.0.2')
+    compile ('org.scala-lang:scala-library:2.12.7')
+    testCompile('com.intuit.karate:karate-apache:0.8.0.1')
+    testCompile('com.intuit.karate:karate-junit4:0.8.0.1')
     testCompile('net.masterthought:cucumber-reporting:4.2.1')
+    testCompile('com.intuit.karate:karate-gatling:0.8.0.1')
+    gatling('com.intuit.karate:karate-gatling:0.8.0.1')
 }
 
 sourceSets {
+    gatling {
+        scala.srcDirs = ['src/gatling/simulations']
+    }
     test {
         java {
             srcDir file('src/test/java')
@@ -32,4 +42,11 @@ test {
     systemProperty "karate.env", System.properties.getProperty("karate.env")
     // Ensure tests are always run
     outputs.upToDateWhen { false }
+}
+
+// not working yet
+gatling {
+    simulations = {
+        include "**/contract/*.scala"
+    }
 }

@@ -1,6 +1,5 @@
 plugins {
-    id "com.github.lkishalmi.gatling" version "3.0.1"
-    id 'java'
+//    id 'java'
     id 'scala'
 }
 
@@ -12,19 +11,31 @@ repositories {
     jcenter()
 }
 
+configurations {
+    gatling
+}
+
 dependencies {
-    compile ('org.scala-lang:scala-library:2.12.7')
     testCompile('com.intuit.karate:karate-apache:0.8.0.1')
     testCompile('com.intuit.karate:karate-junit4:0.8.0.1')
     testCompile('net.masterthought:cucumber-reporting:4.2.1')
-    testCompile('com.intuit.karate:karate-gatling:0.8.0.1')
+    gatling ('org.scala-lang:scala-library:2.12.7')
     gatling('com.intuit.karate:karate-gatling:0.8.0.1')
+    gatling ('com.intuit.karate:karate-apache:0.8.0.1')
+    gatling('com.intuit.karate:karate-junit4:0.8.0.1')
 }
 
 sourceSets {
-    gatling {
-        scala.srcDirs = ['src/gatling/simulations']
+    simulations {
+        scala {
+            srcDirs =['src/simulations/load']
+        }
+        resources {
+            srcDirs =['src/simulations/resources']
+        }
+        compileClasspath += configurations.gatling
     }
+    
     test {
         java {
             srcDir file('src/test/java')
@@ -44,9 +55,16 @@ test {
     outputs.upToDateWhen { false }
 }
 
-// not working yet
-gatling {
-    simulations = {
-        include "**/contract/*.scala"
-    }
+task gatlingRun(type: JavaExec) {
+    description = 'Run gatling tests'
+    new File("${buildDir}/reports/gatling").mkdirs()
+
+    classpath = sourceSets.simulations.runtimeClasspath + configurations.gatling
+
+    main = "io.gatling.app.Gatling"
+    args = ['-s', 'contract.ContractKarateGatlingSimulation',
+            '-sf', 'simulations/resources',
+            '-df', 'simulations/resources',
+            '-rf', "${buildDir}/reports/gatling"
+    ]
 }

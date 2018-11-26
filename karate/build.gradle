@@ -1,6 +1,7 @@
 plugins {
-//    id 'java'
-    id 'scala'
+   id 'java'
+   id 'idea'
+   id 'com.github.lkishalmi.gatling' version '0.7.4'
 }
 
 sourceCompatibility = 10
@@ -19,21 +20,16 @@ dependencies {
     testCompile('com.intuit.karate:karate-apache:0.8.0.1')
     testCompile('com.intuit.karate:karate-junit4:0.8.0.1')
     testCompile('net.masterthought:cucumber-reporting:4.2.1')
-    gatling ('org.scala-lang:scala-library:2.12.7')
     gatling('com.intuit.karate:karate-gatling:0.8.0.1')
     gatling ('com.intuit.karate:karate-apache:0.8.0.1')
     gatling('com.intuit.karate:karate-junit4:0.8.0.1')
 }
 
+
 sourceSets {
-    simulations {
-        scala {
-            srcDirs =['src/simulations/load']
-        }
-        resources {
-            srcDirs =['src/simulations/resources']
-        }
-        compileClasspath += configurations.gatling
+    gatling {
+        scala.srcDirs = ['src/gatling/scala']
+        resources.srcDirs = ['src/gatling/resources']
     }
     
     test {
@@ -55,16 +51,28 @@ test {
     outputs.upToDateWhen { false }
 }
 
-task gatlingRun(type: JavaExec) {
-    description = 'Run gatling tests'
-    new File("${buildDir}/reports/gatling").mkdirs()
+gatling {
+    sourceRoot = 'src/gatling/scala'
+    simulationsDir = 'simulations'
+    simulations = ['ContractKarateGatlingSimulation']
+}
 
-    classpath = sourceSets.simulations.runtimeClasspath + configurations.gatling
+// exclude java compilation. gatling has to run on java 8, sources are on java 9.
+gradle.taskGraph.whenReady {
+    taskGraph ->
+        if (taskGraph.hasTask(gatlingRun)) {
+            compileJava.enabled = false
+            compileTestJava.enabled = false
+            compileGatlingJava.enabled = false
+        }
+}
 
-    main = "io.gatling.app.Gatling"
-    args = ['-s', 'contract.ContractKarateGatlingSimulation',
-            '-sf', 'simulations/resources',
-            '-df', 'simulations/resources',
-            '-rf', "${buildDir}/reports/gatling"
-    ]
+idea {
+    module {
+        testSourceDirs += project.sourceSets.gatling.scala.srcDirs
+        testSourceDirs += project.sourceSets.gatling.resources.srcDirs
+    }
+}
+gatlingRun{
+    systemProperties.remove("java.endorsed.dirs")
 }

@@ -1,5 +1,3 @@
-package contract
-
 import com.intuit.karate.gatling.KarateProtocol
 import com.intuit.karate.gatling.PreDef._
 import io.gatling.core.Predef._
@@ -13,9 +11,9 @@ class ContractKarateGatlingSimulation extends Simulation {
   val testTimeSecs = 20
   val noOfUsers = 10
 
-  val protocol = karateProtocol(
-    "/contract/contract" -> pauseFor("post" -> 25)
-  )
+//  val protocol = karateProtocol(
+//    "/contract/contract" -> pauseFor("post" -> 25)
+//  )
 
   val riskMedium = scenario("Risk Medium")
     .during(testTimeSecs) {
@@ -23,7 +21,7 @@ class ContractKarateGatlingSimulation extends Simulation {
     }
 
   setUp(
-    riskMedium.inject(rampUsers(noOfUsers) over (rampUpTimeSecs)).protocols(protocol)
+    riskMedium.inject(rampUsers(noOfUsers) over (rampUpTimeSecs))
   )
 
 

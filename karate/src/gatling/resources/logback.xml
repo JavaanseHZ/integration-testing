@@ -6,7 +6,7 @@
             <immediateFlush>false</immediateFlush>
         </encoder>
     </appender>
-    <root level="${logLevel}"> (1)
+    <root level="${logLevel}">
         <appender-ref ref="CONSOLE"/>
     </root>
 </configuration>

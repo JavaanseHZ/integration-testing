@@ -4,8 +4,8 @@ plugins {
    id 'com.github.lkishalmi.gatling' version '0.7.4'
 }
 
-sourceCompatibility = 10
-targetCompatibility = 10
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()

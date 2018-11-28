@@ -1,0 +1,14 @@
+clients:
+- id: 1
+  name:
+    firstname: Ben
+    lastname: Sample
+  dateOfBirth: '1988-05-15'
+- id: 2
+  name:
+    firstname: Frank
+    lastname: McDonald
+  dateOfBirth: '1982-01-22'
+type: insurance
+signed: '2018-11-15'
+active: true
